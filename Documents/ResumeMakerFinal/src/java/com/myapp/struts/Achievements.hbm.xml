@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 1 Mar, 2019 3:10:11 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.myapp.struts.Achievements" table="ACHIEVEMENTS" schema="BIO" optimistic-lock="version">
+        <id name="regcode" type="string">
+            <column name="REGCODE" length="6" />
+            <generator class="assigned" />
+        </id>
+        <property name="achieve" type="string">
+            <column name="ACHIEVE" length="100" />
+        </property>
+        <property name="type" type="string">
+            <column name="TYPE" length="50" />
+        </property>
+        <property name="year" type="java.lang.Integer">
+            <column name="YEAR" precision="4" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="LoginBean" type="com.myapp.struts.LoginBean"/>
+        <form-bean name="ttt" type="com.myapp.struts.ttt"/>
+        <form-bean name="Academic" type="com.myapp.struts.Academic"/>
+        <form-bean name="Achievements" type="com.myapp.struts.Achievements"/>
+        <form-bean name="Extracurr" type="com.myapp.struts.Extracurr"/>
+        <form-bean name="Internships" type="com.myapp.struts.Internships"/>
+        <form-bean name="Language" type="com.myapp.struts.Language"/>
+        <form-bean name="Personal" type="com.myapp.struts.Personal"/>
+        <form-bean name="Projects" type="com.myapp.struts.Projects"/>
+        <form-bean name="Techprof" type="com.myapp.struts.Techprof"/>
+        <form-bean name="Workexp" type="com.myapp.struts.Workexp"/>
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="welcome"  path="/Welcome.do"/>
+    </global-forwards>
+
+    <action-mappings>
+        <action input="/personal.jsp" name="Personal" path="/PersonalRegServ" scope="request" type="com.myapp.struts.PersonalRegServ">
+        <forward name="success" path="/achievements_asm.jsp"/>
+        </action>        
+        <action input="/achievements.jsp" name="Achievements" path="/AchieveServ" scope="request" type="com.myapp.struts.AchieveServ">
+        <forward name="success" path="/extracurr_asm.jsp"/>
+        </action>
+        <action input="/academic.jsp" name="Academic" path="/AcademicServ" scope="request" type="com.myapp.struts.AcademicServ">
+        <forward name="success" path="/body_asm.jsp?msg=RegistrationCompleted"/>
+        </action>
+        <action input="/workexp.jsp" name="Workexp" path="/WorkExpServ" scope="request" type="com.myapp.struts.WorkExpServ">
+        <forward name="success" path="/academic_asm.jsp"/>
+        </action>
+        <action input="/internships.jsp" name="Internships" path="/InternServ" scope="request" type="com.myapp.struts.InternServ">
+        <forward name="success" path="/workexp_asm.jsp"/>
+        </action>
+        <action input="/projects.jsp" name="Projects" path="/ProjectServ" scope="request" type="com.myapp.struts.ProjectServ">
+        <forward name="success" path="/internships_asm.jsp"/>
+        </action>
+        <action input="/TechProf.jsp" name="Techprof" path="/TechServ" scope="request" type="com.myapp.struts.TechServ">
+        <forward name="success" path="/projects_asm.jsp"/>
+        </action>
+        <action input="/Langauges.jsp" name="Language" path="/LangServ" scope="request" type="com.myapp.struts.LangServ">
+        <forward name="success" path="/TechProf_asm.jsp"/>
+        </action>
+        <action input="/extracurr.jsp" name="Extracurr" path="/ExtraCurrServ" scope="request" type="com.myapp.struts.ExtraCurrServ">
+        <forward name="success" path="/Languages_asm.jsp"/>
+        </action>
+        <action input="/Login.jsp" name="LoginBean" path="/LoginServ" scope="session" type="com.myapp.struts.LoginServ">
+        <forward name="success" path="/ResumePage.jsp"/>
+        <forward name="failure" path="/body.jsp"/>
+        </action>
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>
